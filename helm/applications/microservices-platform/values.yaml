@@ -12,7 +12,7 @@ services:
     enabled: true
     image:
       repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/api-gateway
-      tag: "dev-20261108-153841"
+      tag: "dev-20261108-uid10001"
       pullPolicy: IfNotPresent
     replicas: 1
     servicePort: 3000
@@ -29,7 +29,7 @@ services:
     enabled: true
     image:
       repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/auth-service
-      tag: "dev-20261108-153841"
+      tag: "dev-20261108-uid10001"
       pullPolicy: IfNotPresent
     replicas: 1
     servicePort: 3000
@@ -46,7 +46,7 @@ services:
     enabled: true
     image:
       repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/employee-service
-      tag: "dev-20261108-153841"
+      tag: "dev-20261108-uid10001"
       pullPolicy: IfNotPresent
     replicas: 1
     servicePort: 3000
@@ -63,7 +63,7 @@ services:
     enabled: true
     image:
       repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/product-service
-      tag: "dev-20261108-153841"
+      tag: "dev-20261108-uid10001"
       pullPolicy: IfNotPresent
     replicas: 1
     servicePort: 3000
@@ -80,7 +80,7 @@ services:
     enabled: true
     image:
       repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/order-service
-      tag: "dev-20261108-153841"
+      tag: "dev-20261108-uid10001"
       pullPolicy: IfNotPresent
     replicas: 1
     servicePort: 3000

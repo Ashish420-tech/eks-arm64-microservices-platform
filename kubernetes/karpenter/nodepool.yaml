@@ -1,0 +1,55 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  annotations:
+    karpenter.sh/nodepool-hash: '1335394503551341669'
+    karpenter.sh/nodepool-hash-version: v3
+  name: arm64-graviton
+spec:
+  disruption:
+    budgets:
+    - nodes: '1'
+    consolidateAfter: 5m
+    consolidationPolicy: WhenEmpty
+  limits:
+    cpu: '8'
+    memory: 32Gi
+  template:
+    metadata:
+      labels:
+        architecture: arm64
+        workload-tier: application
+    spec:
+      expireAfter: 720h
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: arm64-graviton
+      requirements:
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+        - arm64
+      - key: kubernetes.io/os
+        operator: In
+        values:
+        - linux
+      - key: karpenter.sh/capacity-type
+        operator: In
+        values:
+        - on-demand
+      - key: karpenter.k8s.aws/instance-family
+        operator: In
+        values:
+        - t4g
+      - key: karpenter.k8s.aws/instance-size
+        operator: In
+        values:
+        - small
+      - key: topology.kubernetes.io/zone
+        operator: In
+        values:
+        - ap-south-1a
+        - ap-south-1b
+        - ap-south-1c
+      terminationGracePeriod: 1h

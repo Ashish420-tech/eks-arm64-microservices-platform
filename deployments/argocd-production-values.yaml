@@ -1,0 +1,6 @@
+global:
+  imageTag: "dev-20261108-153841"
+
+nodeSelector:
+  kubernetes.io/arch: arm64
+  workload-tier: application

@@ -1,27 +1,63 @@
-# Terraform
-**/.terraform/*
-*.tfstate
-*.tfstate.*
-*.tfplan
-*.tfvars
-*.tfvars.json
-crash.log
-backend.hcl
-
-# Secrets and credentials
+node_modules/
+**/node_modules/
 .env
 .env.*
 !.env.example
-*.pem
-*.key
-.aws/
-
-# Node.js
-node_modules/
-dist/
 coverage/
-
-# IDE and OS
-.vscode/
-.idea/
+dist/
+*.log
 .DS_Store
+.idea/
+.vscode/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Terraform sensitive files and state
+**/*.tfvars
+!**/*.tfvars.example
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform/
+*.tfplan
+crash.log
+
+# Runtime files
+logs/
+*.log
+*.pid
+
+# Node.js dependencies
+node_modules/
+
+# Temporary and backup files
+*.backup
+*.bak
+*.tmp
+
+# Local deployment reports
+/tmp/
+
+# Local database recovery artifacts
+/backups/
+/fix-postgres-permissions.sh
+/fix-postgres-deploy.sh
+/recover-postgres.sh
+/postgres-permanent-recovery.sh
+/postgres-final-recovery.sh
+/postgres-root-entrypoint-recovery.sh
+/postgres-final-deploy.sh
+/permanent-postgres-fix.sh
+/replace-postgres-pod-safely.sh
+/postgres-final-diagnosis.sh
+/diagnose-postgres-statefulset.sh
+/postgres-root-cause.sh
+/restore-eks-access.sh
+/deploy-database.sh
+/terraform/backend/backend.hcl

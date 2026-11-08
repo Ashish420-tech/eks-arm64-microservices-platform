@@ -1,0 +1,20 @@
+{
+  "name": "eks-arm64-microservices-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ARM64 Kubernetes microservices platform using Node.js, AWS EKS, Karpenter and GitOps",
+  "workspaces": [
+    "services/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=api-gateway\" \"npm run dev --workspace=auth-service\" \"npm run dev --workspace=employee-service\" \"npm run dev --workspace=product-service\" \"npm run dev --workspace=order-service\"",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

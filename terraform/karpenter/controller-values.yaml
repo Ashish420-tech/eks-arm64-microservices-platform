@@ -1,0 +1,23 @@
+replicas: 1
+
+serviceAccount:
+  create: false
+  name: karpenter
+
+nodeSelector:
+  kubernetes.io/os: linux
+  kubernetes.io/arch: arm64
+
+controller:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 768Mi
+
+settings:
+  enableZonalShift: false
+  clusterName: eks-arm64-platform
+  interruptionQueue: eks-arm64-platform

@@ -1,0 +1,31 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  annotations:
+    karpenter.k8s.aws/ec2nodeclass-hash: '2372608734331437756'
+    karpenter.k8s.aws/ec2nodeclass-hash-version: v6
+  finalizers:
+  - karpenter.k8s.aws/termination
+  name: arm64-graviton
+spec:
+  amiSelectorTerms:
+  - alias: al2023@latest
+  blockDeviceMappings:
+  - deviceName: /dev/xvda
+    ebs:
+      deleteOnTermination: true
+      encrypted: true
+      volumeSize: 30Gi
+      volumeType: gp3
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
+  role: KarpenterNodeRole-eks-arm64-platform
+  securityGroupSelectorTerms:
+  - tags:
+      karpenter.sh/discovery: eks-arm64-platform
+  subnetSelectorTerms:
+  - tags:
+      karpenter.sh/discovery: eks-arm64-platform

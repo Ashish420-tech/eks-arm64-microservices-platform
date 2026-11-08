@@ -1,0 +1,6 @@
+apiVersion: v2
+name: microservices-platform
+description: ARM64 EKS Node.js microservices platform with PostgreSQL
+type: application
+version: 1.0.0
+appVersion: "1.0.0"

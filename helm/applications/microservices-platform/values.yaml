@@ -1,0 +1,112 @@
+global:
+  environment: production
+
+nodeSelector:
+  kubernetes.io/arch: arm64
+
+secrets:
+  name: platform-secrets
+
+services:
+  api-gateway:
+    enabled: true
+    image:
+      repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/api-gateway
+      tag: "dev-20261108-153841"
+      pullPolicy: IfNotPresent
+    replicas: 1
+    servicePort: 3000
+    readinessPath: /health
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 384Mi
+
+  auth-service:
+    enabled: true
+    image:
+      repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/auth-service
+      tag: "dev-20261108-153841"
+      pullPolicy: IfNotPresent
+    replicas: 1
+    servicePort: 3000
+    readinessPath: /ready
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 384Mi
+
+  employee-service:
+    enabled: true
+    image:
+      repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/employee-service
+      tag: "dev-20261108-153841"
+      pullPolicy: IfNotPresent
+    replicas: 1
+    servicePort: 3000
+    readinessPath: /ready
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 384Mi
+
+  product-service:
+    enabled: true
+    image:
+      repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/product-service
+      tag: "dev-20261108-153841"
+      pullPolicy: IfNotPresent
+    replicas: 1
+    servicePort: 3000
+    readinessPath: /ready
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 384Mi
+
+  order-service:
+    enabled: true
+    image:
+      repository: 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/order-service
+      tag: "dev-20261108-153841"
+      pullPolicy: IfNotPresent
+    replicas: 1
+    servicePort: 3000
+    readinessPath: /ready
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 384Mi
+
+postgres:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "17-alpine"
+  replicas: 1
+  persistence:
+    enabled: true
+    size: 8Gi
+    storageClass: ""
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi

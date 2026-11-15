@@ -1,0 +1,267 @@
+apiVersion: v1
+items:
+- apiVersion: argoproj.io/v1alpha1
+  kind: Application
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"microservices","namespace":"argocd"},"spec":{"destination":{"namespace":"microservices","server":"https://kubernetes.default.svc"},"project":"default","source":{"path":"kubernetes/microservices","repoURL":"https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git","targetRevision":"main"},"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["CreateNamespace=true","PruneLast=true"]}}}
+    creationTimestamp: "2026-11-15T14:07:53Z"
+    generation: 68
+    name: microservices
+    namespace: argocd
+    resourceVersion: "120303"
+    uid: f4af0c1e-2324-4139-bb68-e890ef6e5337
+  spec:
+    destination:
+      namespace: microservices
+      server: https://kubernetes.default.svc
+    project: default
+    source:
+      path: kubernetes/microservices
+      repoURL: https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git
+      targetRevision: main
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+  status:
+    controllerNamespace: argocd
+    health:
+      lastTransitionTime: "2026-11-15T14:08:42Z"
+      status: Healthy
+    history:
+    - deployStartedAt: "2026-11-15T14:07:56Z"
+      deployedAt: "2026-11-15T14:07:58Z"
+      id: 0
+      initiatedBy:
+        automated: true
+      revision: 7e24e2103d87f8c0b63e29192c3826da62277dd7
+      source:
+        path: kubernetes/microservices
+        repoURL: https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git
+        targetRevision: main
+    operationState:
+      finishedAt: "2026-11-15T14:07:59Z"
+      message: successfully synced (all tasks run)
+      operation:
+        initiatedBy:
+          automated: true
+        retry:
+          limit: 5
+        sync:
+          prune: true
+          revision: 7e24e2103d87f8c0b63e29192c3826da62277dd7
+          source:
+            path: kubernetes/microservices
+            repoURL: https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git
+            targetRevision: main
+          syncOptions:
+          - CreateNamespace=true
+          - PruneLast=true
+      phase: Succeeded
+      startedAt: "2026-11-15T14:07:56Z"
+      syncResult:
+        resources:
+        - group: ""
+          hookPhase: Running
+          kind: Namespace
+          message: namespace/microservices configured
+          name: microservices
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/employee-service created
+          name: employee-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/product-service created
+          name: product-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/order-service created
+          name: order-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/api-gateway created
+          name: api-gateway
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/auth-service created
+          name: auth-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          images:
+          - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/auth-service:dev-arm64-20261115T125951Z
+          kind: Deployment
+          message: deployment.apps/auth-service created
+          name: auth-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          images:
+          - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/employee-service:dev-arm64-20261115T125951Z
+          kind: Deployment
+          message: deployment.apps/employee-service created
+          name: employee-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          images:
+          - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/product-service:dev-arm64-20261115T125951Z
+          kind: Deployment
+          message: deployment.apps/product-service created
+          name: product-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          images:
+          - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/api-gateway:dev-arm64-20261115T125951Z
+          kind: Deployment
+          message: deployment.apps/api-gateway created
+          name: api-gateway
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          images:
+          - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/order-service:dev-arm64-20261115T125951Z
+          kind: Deployment
+          message: deployment.apps/order-service created
+          name: order-service
+          namespace: microservices
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        revision: 7e24e2103d87f8c0b63e29192c3826da62277dd7
+        source:
+          path: kubernetes/microservices
+          repoURL: https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git
+          targetRevision: main
+    reconciledAt: "2026-11-15T17:04:06Z"
+    resourceHealthSource: appTree
+    resources:
+    - kind: Namespace
+      name: microservices
+      status: Synced
+      version: v1
+    - kind: Service
+      name: api-gateway
+      namespace: microservices
+      status: Synced
+      version: v1
+    - kind: Service
+      name: auth-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - kind: Service
+      name: employee-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - kind: Service
+      name: order-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - kind: Service
+      name: product-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - group: apps
+      kind: Deployment
+      name: api-gateway
+      namespace: microservices
+      status: Synced
+      version: v1
+    - group: apps
+      kind: Deployment
+      name: auth-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - group: apps
+      kind: Deployment
+      name: employee-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - group: apps
+      kind: Deployment
+      name: order-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    - group: apps
+      kind: Deployment
+      name: product-service
+      namespace: microservices
+      status: Synced
+      version: v1
+    sourceHydrator: {}
+    sourceType: Kustomize
+    summary:
+      images:
+      - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/api-gateway:dev-arm64-20261115T125951Z
+      - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/auth-service:dev-arm64-20261115T125951Z
+      - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/employee-service:dev-arm64-20261115T125951Z
+      - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/order-service:dev-arm64-20261115T125951Z
+      - 924408032261.dkr.ecr.ap-south-1.amazonaws.com/eks-arm64-platform/product-service:dev-arm64-20261115T125951Z
+    sync:
+      comparedTo:
+        destination:
+          namespace: microservices
+          server: https://kubernetes.default.svc
+        source:
+          path: kubernetes/microservices
+          repoURL: https://github.com/Ashish420-tech/eks-arm64-microservices-platform.git
+          targetRevision: main
+      revision: 7e24e2103d87f8c0b63e29192c3826da62277dd7
+      status: Synced
+kind: List
+metadata:
+  resourceVersion: ""

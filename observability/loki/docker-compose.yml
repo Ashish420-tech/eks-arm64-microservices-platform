@@ -1,0 +1,19 @@
+services:
+  loki:
+    image: grafana/loki:3.5.7
+    container_name: monitoring-loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/loki.yml
+    ports:
+      - "10.0.11.218:3100:3100"
+    volumes:
+      - ./config/loki.yml:/etc/loki/loki.yml:ro
+      - ./data:/loki
+    networks:
+      - monitoring
+    mem_limit: 768m
+    cpus: 0.75
+networks:
+  monitoring:
+    external: true
+    name: monitoring_monitoring

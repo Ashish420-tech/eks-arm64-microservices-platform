@@ -1,0 +1,11 @@
+groups:
+  - name: monitoring-alerts
+    rules:
+      - alert: PrometheusTargetDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus target is down"
+          description: "Target {{ $labels.instance }} for job {{ $labels.job }} is unavailable."

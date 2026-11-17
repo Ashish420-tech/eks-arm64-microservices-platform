@@ -1,0 +1,74 @@
+apiVersion: v1
+data:
+  config.alloy: |
+    logging {
+      level = "info"
+      format = "logfmt"
+    }
+
+    discovery.kubernetes "pod" {
+      role = "pod"
+    }
+
+    discovery.relabel "pod_logs" {
+      targets = discovery.kubernetes.pod.targets
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        target_label = "namespace"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label = "pod"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label = "container"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+        target_label = "app"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"]
+        separator = "/"
+        target_label = "job"
+      }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_node_name"]
+        target_label = "node"
+      }
+    }
+
+    loki.source.kubernetes "pod_logs" {
+      targets = discovery.relabel.pod_logs.output
+      forward_to = [loki.process.pod_logs.receiver]
+    }
+
+    loki.process "pod_logs" {
+      stage.static_labels {
+        values = {
+          cluster = "eks-arm64-platform",
+          environment = "production",
+        }
+      }
+      forward_to = [loki.write.default.receiver]
+    }
+
+    loki.write "default" {
+      endpoint {
+        url = "http://10.0.11.218:3100/loki/api/v1/push"
+      }
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.alloy":"logging {\n  level = \"info\"\n  format = \"logfmt\"\n}\n\ndiscovery.kubernetes \"pod\" {\n  role = \"pod\"\n}\n\ndiscovery.relabel \"pod_logs\" {\n  targets = discovery.kubernetes.pod.targets\n\n  rule {\n    source_labels = [\"__meta_kubernetes_namespace\"]\n    target_label = \"namespace\"\n  }\n\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_name\"]\n    target_label = \"pod\"\n  }\n\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_container_name\"]\n    target_label = \"container\"\n  }\n\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_label_app_kubernetes_io_name\"]\n    target_label = \"app\"\n  }\n\n  rule {\n    source_labels = [\"__meta_kubernetes_namespace\", \"__meta_kubernetes_pod_container_name\"]\n    separator = \"/\"\n    target_label = \"job\"\n  }\n\n  rule {\n    source_labels = [\"__meta_kubernetes_pod_node_name\"]\n    target_label = \"node\"\n  }\n}\n\nloki.source.kubernetes \"pod_logs\" {\n  targets = discovery.relabel.pod_logs.output\n  forward_to = [loki.process.pod_logs.receiver]\n}\n\nloki.process \"pod_logs\" {\n  stage.static_labels {\n    values = {\n      cluster = \"eks-arm64-platform\",\n      environment = \"production\",\n    }\n  }\n  forward_to = [loki.write.default.receiver]\n}\n\nloki.write \"default\" {\n  endpoint {\n    url = \"http://10.0.11.218:3100/loki/api/v1/push\"\n  }\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"alloy-central-config","namespace":"observability"}}
+  name: alloy-central-config
+  namespace: observability
